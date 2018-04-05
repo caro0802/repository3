@@ -16,6 +16,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
+import org.eclipse.paho.client.mqttv3.MqttClient;
+import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
 
 /**
  * Hauptklasse unseres kleinen Progrämmchens.
@@ -64,7 +66,18 @@ public class Main {
         // Die Nachricht muss dem MqttConnectOptions-Objekt übergeben werden
         // und soll an das Topic Utils.MQTT_TOPIC_NAME gesendet werden.
         
-        // TODO: Verbindung zum MQTT-Broker herstellen.
+       // TODO: Verbindung zum MQTT-Broker herstellen.
+        MqttConnectOptions options = new MqttConnectOptions();
+        options.setCleanSession(true);
+        //options.setUserName("USERNAME");
+        //options.setPassword("PASSWORD");
+
+        System.out.println("Starte Simulation. Drücke ENTER zum Beenden.");
+        System.out.println();
+
+        MqttClient client = new MqttClient(mqttAddress, vehicleId);
+        client.connect(options);
+
 
         // TODO: Statusmeldung mit "type" = "StatusType.VEHICLE_READY" senden.
         // Die Nachricht soll soll an das Topic Utils.MQTT_TOPIC_NAME gesendet
